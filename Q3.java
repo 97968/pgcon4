@@ -14,17 +14,14 @@ public class Main {
             }
         }
         
-        int[][] dp = new int[N * N + 1][M + 1];
-        Arrays.fill(dp[0], 0);
+        int[] dp = new int[M + 1];
         for(int i = 1; i < N * N + 1; i++){
-            for(int j = 1; j < M + 1; j++){
+            for(int j = M; j >= 0; j--){
                 if(j - w[i - 1] >= 0){
-                    dp[i][j] = Math.max(dp[i - 1][j], dp[i - 1][j - w[i - 1]] + v[i - 1]);
-                }else{
-                    dp[i][j] = dp[i - 1][j];
+                    dp[j] = Math.max(dp[j], dp[j - w[i - 1]] + v[i - 1]);
                 }
             }
         }
-        System.out.println(dp[N * N][M]);
+        System.out.println(dp[M]);
     }
 }
