@@ -6,10 +6,11 @@ public class Main {
     public static void main(String[] args) {
         String s = in.nextLine();
  
-        long ans = 0;
-        for (int i = 1; i <= s.length(); i++) {
-            long t = Long.parseLong(s.substring(Math.max(0, i - 6), i));
-            t *= i == s.length() ? 1 : 2 * (long)Math.pow(3, s.length() - 1 - i);
+        long ans = 0, c = 1;
+        for(int i = s.length(); i > 0; i--){
+            long t = Long.parseLong(s.substring(Math.max(0,  i - 6), i));
+            c = (c * Math.min(3, s.length() - i + 1)) % 1000000;
+            t = (t % 1000000) * c;
             ans = (ans + t) % 1000000;
         }
         System.out.println(ans % 1000000);
